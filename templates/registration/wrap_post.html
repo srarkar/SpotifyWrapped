@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Upload Your Spotify Wrap - Rewindify{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <!-- Scrollable Window -->
+    <div class="window-container bg-info text-white rounded shadow-lg p-4 position-relative">
+
+        <h2 class="text-center text-primary mb-4">Upload Your Spotify Wrap</h2>
+
+        <!-- Form for uploading wrap -->
+
+        <hr>
+
+        <!-- Display the latest uploaded wrap (if any) -->
+        {% if wraps %}
+            <div class="wrap-item bg-dark text-light p-3 rounded shadow-sm mt-4">
+                <h3 class="text-warning">Your Latest Wrap</h3>
+                <p><strong>Top Artists:</strong>
+                    {% for artist in wraps.top_artists %}
+                        {{ artist.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <hr>
+                <a href="/" class="btn btn-primary">Back to Home</a>
+            </div>
+        {% else %}
+            <p class="text-warning text-center">No wraps uploaded yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .window-container {
+        width: 90%;
+        max-width: 800px;
+        height: auto;
+    }
+
+    .wrap-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .wrap-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .wrap-item h3 {
+        font-size: 1.8rem;
+    }
+
+    .wrap-item p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+    }
+
+    .btn-sm {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.7rem;
+    }
+</style>
+{% endblock %}
